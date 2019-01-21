@@ -44,11 +44,19 @@ class App extends ComponentBase<{}, AppState> {
           { this.state.addForm ? <TodoAddTaskForm onClose={this._CloseForm} Submit={this._onSubmit}/> : null}
         </Box>
         <Meter type='circle' values={[{ value: 30, label: 'Test' }, { value: 100, label: 'Test 2' }]} />
-        <ul>
-      { this.state.todos.map((val, index) => (
-          <li key={val.id}>{val.text}</li>
-      ))}
-      </ul>
+        <Box fill tag='ul' border='top'>
+          {this.state.todos.map((val, index) => (
+            <Box
+              align='center'
+              tag='li'
+              direction='row'
+              border='bottom'
+              pad='medium'
+              key={val.id}>
+              {val.text}
+            </Box>
+          ))}
+        </Box>
       </Grommet>
 
     );
