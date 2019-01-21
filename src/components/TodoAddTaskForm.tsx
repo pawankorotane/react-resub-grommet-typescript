@@ -47,9 +47,6 @@ const TodoAddTaskForm: React.SFC<TodoAddTaskFormProps> = ({ onClose, Submit }) =
                             />
                         </FormField>
                     </Box>
-                    <Box>
-                        <FormField label='Email' name="email" required />
-                    </Box>
                     <Box pad={{ vertical: 'large' }} align='start' tag='footer'>
                         <Button type='submit' label='Add' />
                     </Box>

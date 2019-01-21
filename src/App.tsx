@@ -5,17 +5,22 @@ import { Grommet, Box, Button, Heading, Meter, Form, FormField} from 'grommet';
 import './App.css';
 import AppBar from './components/AppBar';
 import TodoAddTaskForm from './components/TodoAddTaskForm';
+import { Todo } from './models/TodoModels';
+import TodoStore from './store/TodoStore';
 
 interface AppState {
-  addForm: boolean
+  addForm: boolean,
+  todos: Todo[]
 }
 
 class App extends ComponentBase<{}, AppState> {
 
-  constructor(props: any){
-    super(props);
-    this.state = { addForm: false}
-  }
+  protected _buildState(props: {}, initialBuild: boolean): AppState {
+    return {
+        todos: TodoStore.getTodos(),
+        addForm: false
+    }
+}
 
   private _OpenForm = () => {
     this.setState({addForm: true})
@@ -26,7 +31,7 @@ class App extends ComponentBase<{}, AppState> {
   }
 
   private _onSubmit =  (event: any) => {
-    alert(event.target.label.value)
+    TodoStore.addTodo(event.target.label.value);
   }
   render() {
     return (
@@ -39,7 +44,11 @@ class App extends ComponentBase<{}, AppState> {
           { this.state.addForm ? <TodoAddTaskForm onClose={this._CloseForm} Submit={this._onSubmit}/> : null}
         </Box>
         <Meter type='circle' values={[{ value: 30, label: 'Test' }, { value: 100, label: 'Test 2' }]} />
-      
+        <ul>
+      { this.state.todos.map((val, index) => (
+          <li key={val.id}>{val.text}</li>
+      ))}
+      </ul>
       </Grommet>
 
     );
