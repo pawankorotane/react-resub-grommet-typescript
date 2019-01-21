@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { ComponentBase } from 'resub';
-import { Grommet, Box, Button, Heading, Meter, Form, FormField} from 'grommet';
+import { Grommet, Box, Button, Heading, Meter, Text} from 'grommet';
 
 import './App.css';
 import AppBar from './components/AppBar';
@@ -43,8 +43,13 @@ class App extends ComponentBase<{}, AppState> {
           <Button label='Add Task'  onClick={this._OpenForm}/>
           { this.state.addForm ? <TodoAddTaskForm onClose={this._CloseForm} Submit={this._onSubmit}/> : null}
         </Box>
-        <Meter type='circle' values={[{ value: 30, label: 'Test' }, { value: 100, label: 'Test 2' }]} />
-        <Box fill tag='ul' border='top'>
+        <Box direction='row-responsive'>
+          <Box basis='1/3' align='center'>
+          <Meter type='circle' values={[{ value: 30, label: 'Test' }, { value: 100, label: 'Test 2' }]} />
+          </Box>
+          <Box pad='medium' basis='2/3'>
+          <Text margin={{ vertical: 'small' }} size='large'>My Tasks</Text>
+          <Box fill tag='ul' border='top'>
           {this.state.todos.map((val, index) => (
             <Box
               align='center'
@@ -56,6 +61,8 @@ class App extends ComponentBase<{}, AppState> {
               {val.text}
             </Box>
           ))}
+          </Box>
+        </Box>
         </Box>
       </Grommet>
 
