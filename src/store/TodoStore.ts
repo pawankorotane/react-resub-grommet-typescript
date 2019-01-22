@@ -1,50 +1,45 @@
-import { autoSubscribe, AutoSubscribeStore, StoreBase } from 'resub';
+import {
+  autoSubscribe,
+  AutoSubscribeStore,
+  StoreBase,
+  autoSubscribeWithKey
+} from 'resub';
 
 import { Todo } from '../models/TodoModels';
 
+const todoSubKey: string = 'TodoSubKey';
+
 @AutoSubscribeStore
 class TodosStore extends StoreBase {
-    
-    private _todos: Todo[] = [];
-    private _status: string= '';
-    
-    addTodo(todoText: string) {
-        const now = Date.now().valueOf();
-        let newTodo: Todo = {
-            id: now.toString(),
-            creationTime: now,
-            text: todoText,
-        };
-        this._todos = this._todos.concat(newTodo);
-        this.trigger();
-        return newTodo;
-    }
+  private _todos: Todo[] = [];
+  static TodoStoreKey = 'TodoStoreKeySub';
 
-    @autoSubscribe
-    getTodos() {
-        return this._todos;
-    }
+  addTodo(todoText: string) {
+    const now = Date.now().valueOf();
+    let newTodo: Todo = {
+      id: now.toString(),
+      creationTime: now,
+      text: todoText
+    };
+    this._todos = this._todos.concat(newTodo);
+    this.trigger(todoSubKey);
+    return newTodo;
+  }
 
-    @autoSubscribe
-    getTodoById(todoId: string) {
-        return this._todos.find(todo => todo.id === todoId);
-    }
+  @autoSubscribeWithKey(todoSubKey)
+  getTodos() {
+    return this._todos;
+  }
 
-    deleteTodo(todoId: string) {
-        this._todos = this._todos.filter(todo => todo.id !== todoId);
-        this.trigger();
-    }
+  @autoSubscribe
+  getTodoById(todoId: string) {
+    return this._todos.find(todo => todo.id === todoId);
+  }
 
-    @autoSubscribe
-    getStatus() {
-        return this._status;
-    }
-
-    setStatus(status: any) {
-        this._status = status;
-        this.trigger();
-        return this._status;
-    }
+  deleteTodo(todoId: string) {
+    this._todos = this._todos.filter(todo => todo.id !== todoId);
+    this.trigger(todoSubKey);
+  }
 }
 
 export default new TodosStore();
