@@ -13,6 +13,7 @@ import {
   TableBody
 } from 'grommet';
 import { v1 } from 'grommet-theme-v1';
+import { Add } from 'grommet-icons';
 
 import { AppBar, DeleteButton, TodoAddTaskForm } from './components';
 import { Todo } from './models/TodoModels';
@@ -43,7 +44,7 @@ class App extends ComponentBase<{}, AppState> {
     TodoStore.addTodo(event.target.label.value);
   };
 
-  private _onDelete = (id: any) => {
+  private _onDelete = (id: string) => {
     TodoStore.deleteTodo(id);
   };
 
@@ -62,7 +63,7 @@ class App extends ComponentBase<{}, AppState> {
           </Heading>
         </AppBar>
         <Box pad={{ vertical: 'medium' }} align='center'>
-          <Button label='Add Task' onClick={this._OpenForm} />
+          <Button label='Add Task' onClick={this._OpenForm} icon={<Add/>}/>
           {this.state.addForm ? (
             <TodoAddTaskForm
               onClose={this._CloseForm}
