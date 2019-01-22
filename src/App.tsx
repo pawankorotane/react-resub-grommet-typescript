@@ -5,7 +5,6 @@ import {
   Box,
   Button,
   Heading,
-  Meter,
   Text,
   Table,
   TableHeader,
@@ -13,13 +12,9 @@ import {
   TableRow,
   TableBody
 } from 'grommet';
-import { Close } from 'grommet-icons';
 import { v1 } from 'grommet-theme-v1';
 
-import './App.css';
-import AppBar from './components/AppBar';
-import TodoAddTaskForm from './components/TodoAddTaskForm';
-import { DeleteButton } from './components/DeleteButton'
+import { AppBar, DeleteButton, TodoAddTaskForm } from './components';
 import { Todo } from './models/TodoModels';
 import TodoStore from './store/TodoStore';
 
@@ -49,25 +44,25 @@ class App extends ComponentBase<{}, AppState> {
   };
 
   private _onDelete = (id: any) => {
-      TodoStore.deleteTodo(id);
+    TodoStore.deleteTodo(id);
   };
-  
+
   render() {
     return (
       <Grommet theme={v1}>
         <AppBar>
           <Heading
-            textAlign="center"
+            textAlign='center'
             style={{ maxWidth: '100%' }}
-            level="3"
+            level='3'
             responsive
-            size="small"
+            size='small'
           >
             React Microsoft ReSub Grommet Typescript Todo App
           </Heading>
         </AppBar>
-        <Box pad={{ vertical: 'medium' }} align="center">
-          <Button label="Add Task" onClick={this._OpenForm} />
+        <Box pad={{ vertical: 'medium' }} align='center'>
+          <Button label='Add Task' onClick={this._OpenForm} />
           {this.state.addForm ? (
             <TodoAddTaskForm
               onClose={this._CloseForm}
@@ -75,10 +70,10 @@ class App extends ComponentBase<{}, AppState> {
             />
           ) : null}
         </Box>
-        <Box fill pad="medium">
-          <Text size="large">My Tasks</Text>
+        <Box fill pad='medium'>
+          <Text size='large'>My Tasks</Text>
         </Box>
-        <Box fill tag="ul" pad="medium">
+        <Box fill tag='ul' pad='medium'>
           {this.state.todos.length > 0 ? (
             <Table style={{ width: '100%' }}>
               <TableHeader>
@@ -92,7 +87,7 @@ class App extends ComponentBase<{}, AppState> {
                   <TableRow key={index}>
                     <TableCell>{val.text}</TableCell>
                     <TableCell>
-                      <DeleteButton id={val.id} deleteTodo={this._onDelete}/>
+                      <DeleteButton id={val.id} deleteTodo={this._onDelete} />
                     </TableCell>
                   </TableRow>
                 ))}

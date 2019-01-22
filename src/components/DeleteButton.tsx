@@ -2,13 +2,12 @@ import * as React from 'react';
 import { Button } from 'grommet';
 import { Close } from 'grommet-icons'
 
-import TodoStore from '../store/TodoStore'
-
 interface DeleteButtonProps {
   id: string;
   deleteTodo: (id: string) => void;
 }
-export const DeleteButton: React.SFC<DeleteButtonProps> = ({
+
+const DeleteButton: React.SFC<DeleteButtonProps> = ({
   id,
   deleteTodo
 }) => {
@@ -21,3 +20,5 @@ export const DeleteButton: React.SFC<DeleteButtonProps> = ({
     </React.Fragment>
   );
 };
+
+export default DeleteButton;
