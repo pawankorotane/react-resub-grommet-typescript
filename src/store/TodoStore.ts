@@ -6,6 +6,7 @@ import { Todo } from '../models/TodoModels';
 class TodosStore extends StoreBase {
     
     private _todos: Todo[] = [];
+    private _status: string= '';
     
     addTodo(todoText: string) {
         const now = Date.now().valueOf();
@@ -32,6 +33,17 @@ class TodosStore extends StoreBase {
     deleteTodo(todoId: string) {
         this._todos = this._todos.filter(todo => todo.id !== todoId);
         this.trigger();
+    }
+
+    @autoSubscribe
+    getStatus() {
+        return this._status;
+    }
+
+    setStatus(status: any) {
+        this._status = status;
+        this.trigger();
+        return this._status;
     }
 }
 

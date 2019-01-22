@@ -1,4 +1,5 @@
 import * as React from 'react';
+
 import {
     Box,
     Button,
@@ -11,13 +12,22 @@ import {
 } from 'grommet';
 
 import { Close } from 'grommet-icons';
+import { Todo } from '../models/TodoModels';
 
 interface TodoAddTaskFormProps {
     onClose?: () => void,
-    Submit?: (val: any) => void
+    Submit?: (val: any) => void,
+    updateStatus?: (option: any) => void,
+    status?: string
 }
 
-const TodoAddTaskForm: React.SFC<TodoAddTaskFormProps> = ({ onClose, Submit }) => {
+enum statusOptions {
+    critical = 0,
+    ok = 0,
+    warning = 0
+}
+
+const TodoAddTaskForm: React.SFC<TodoAddTaskFormProps> = ({ onClose, Submit, updateStatus, status }) => {
     return (
         <Layer position='right' full='vertical' modal onClickOutside={onClose} onEsc={onClose}>
             <Box pad='small'>
@@ -42,8 +52,10 @@ const TodoAddTaskForm: React.SFC<TodoAddTaskFormProps> = ({ onClose, Submit }) =
                             <Select
                                 id='select'
                                 placeholder='Select'
-                                options={['one', 'two', 'three']}
+                                options={['Done', 'Warning', 'Past Due']}
                                 required
+                                onChange={updateStatus}
+                                value={status}
                             />
                         </FormField>
                     </Box>
