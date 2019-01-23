@@ -14,7 +14,7 @@ interface TodoState {
   todo: Todo
 }
 
-class CompleteCheckBox extends ComponentBase<CompleteCheckBoxProps, TodoState> {
+class CompleteCheckBox extends ComponentBase<{}, TodoState> {
   protected _buildState(props: CompleteCheckBoxProps, initialBuild: boolean): TodoState {
     return {
       todo: TodoStore.getTodoById(props.id),
