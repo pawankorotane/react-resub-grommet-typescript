@@ -2,7 +2,8 @@ import {
   autoSubscribe,
   AutoSubscribeStore,
   StoreBase,
-  autoSubscribeWithKey
+  autoSubscribeWithKey,
+  key
 } from 'resub';
 
 import { Todo } from '../models/TodoModels';
@@ -19,7 +20,8 @@ class TodosStore extends StoreBase {
     let newTodo: Todo = {
       id: now.toString(),
       creationTime: now,
-      text: todoText
+      text: todoText,
+      status: false
     };
     this._todos = this._todos.concat(newTodo);
     this.trigger(todoSubKey);
@@ -31,7 +33,7 @@ class TodosStore extends StoreBase {
     return this._todos;
   }
 
-  @autoSubscribe
+  @autoSubscribeWithKey('complete')
   getTodoById(todoId: string) {
     return this._todos.find(todo => todo.id === todoId);
   }
@@ -39,6 +41,21 @@ class TodosStore extends StoreBase {
   deleteTodo(todoId: string) {
     this._todos = this._todos.filter(todo => todo.id !== todoId);
     this.trigger(todoSubKey);
+  }
+
+  setTodoComplete(todoId: string) {
+    const findIndex = this._todos.findIndex((todo) => todo.id === todoId);
+  /*  this._todos = this._todos.map(todo => {
+      if (todo.id === todoId) {
+        todo.status = true;
+      }
+      return todo;
+    });
+   */
+    this._todos[findIndex].status = true;
+  this.trigger(todoSubKey);
+  return this._todos[findIndex]
+
   }
 }
 

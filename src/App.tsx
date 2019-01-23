@@ -18,6 +18,7 @@ import { Add } from 'grommet-icons';
 import { AppBar, DeleteButton, TodoAddTaskForm } from './components';
 import { Todo } from './models/TodoModels';
 import TodoStore from './store/TodoStore';
+import CompleteCheckBox from './components/CompleteCheckbox';
 
 interface AppState {
   addForm: boolean;
@@ -48,22 +49,34 @@ class App extends ComponentBase<{}, AppState> {
     TodoStore.deleteTodo(id);
   };
 
+  private _setComplete = (id: string) => {
+     //TodoStore.setTodoComplete(id);
+     this.setState({
+       todos: this.state.todos.map((todo) => {
+        if(todo.id === id) {
+          todo.status = true;
+        }
+        return todo;
+       })
+     })
+    }
+  
   render() {
     return (
       <Grommet theme={v1}>
         <AppBar>
           <Heading
-            textAlign='center'
+            textAlign="center"
             style={{ maxWidth: '100%' }}
-            level='3'
+            level="3"
             responsive
-            size='small'
+            size="small"
           >
             React Microsoft ReSub Grommet Typescript Todo App
           </Heading>
         </AppBar>
-        <Box pad={{ vertical: 'medium' }} align='center'>
-          <Button label='Add Task' onClick={this._OpenForm} icon={<Add/>}/>
+        <Box pad={{ vertical: 'medium' }} align="center">
+          <Button label="Add Task" onClick={this._OpenForm} icon={<Add />} />
           {this.state.addForm ? (
             <TodoAddTaskForm
               onClose={this._CloseForm}
@@ -71,14 +84,15 @@ class App extends ComponentBase<{}, AppState> {
             />
           ) : null}
         </Box>
-        <Box fill pad='medium'>
-          <Text size='large'>My Tasks</Text>
+        <Box fill pad="medium">
+          <Text size="large">My Tasks</Text>
         </Box>
-        <Box fill tag='ul' pad='medium'>
+        <Box fill tag="ul" pad="medium">
           {this.state.todos.length > 0 ? (
             <Table style={{ width: '100%' }}>
               <TableHeader>
                 <TableRow>
+                  <TableCell>Completed</TableCell>
                   <TableCell>Description</TableCell>
                   <TableCell>Action</TableCell>
                 </TableRow>
@@ -86,6 +100,9 @@ class App extends ComponentBase<{}, AppState> {
               <TableBody>
                 {this.state.todos.map((val, index) => (
                   <TableRow key={index}>
+                    <TableCell>
+                     <CompleteCheckBox id={val.id} checked={val.status} completeTodo={this._setComplete} />
+                    </TableCell>
                     <TableCell>{val.text}</TableCell>
                     <TableCell>
                       <DeleteButton id={val.id} deleteTodo={this._onDelete} />
