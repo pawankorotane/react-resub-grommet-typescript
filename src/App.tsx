@@ -26,6 +26,7 @@ interface AppState {
 }
 
 class App extends ComponentBase<{}, AppState> {
+
   protected _buildState(props: {}, initialBuild: boolean): AppState {
     return {
       todos: TodoStore.getTodos(),
@@ -49,18 +50,7 @@ class App extends ComponentBase<{}, AppState> {
     TodoStore.deleteTodo(id);
   };
 
-  private _setComplete = (id: string) => {
-     //TodoStore.setTodoComplete(id);
-     this.setState({
-       todos: this.state.todos.map((todo) => {
-        if(todo.id === id) {
-          todo.status = true;
-        }
-        return todo;
-       })
-     })
-    }
-  
+
   render() {
     return (
       <Grommet theme={v1}>
@@ -101,7 +91,7 @@ class App extends ComponentBase<{}, AppState> {
                 {this.state.todos.map((val, index) => (
                   <TableRow key={index}>
                     <TableCell>
-                     <CompleteCheckBox id={val.id} checked={val.status} completeTodo={this._setComplete} />
+                      <CompleteCheckBox todo={val} />
                     </TableCell>
                     <TableCell>{val.text}</TableCell>
                     <TableCell>
@@ -112,8 +102,8 @@ class App extends ComponentBase<{}, AppState> {
               </TableBody>
             </Table>
           ) : (
-            undefined
-          )}
+              undefined
+            )}
         </Box>
       </Grommet>
     );

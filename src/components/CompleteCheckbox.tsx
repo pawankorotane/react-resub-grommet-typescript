@@ -5,37 +5,42 @@ import TodoStore from '../store/TodoStore';
 import { Todo } from '../models/TodoModels';
 
 
-interface CompleteCheckBoxProps  {
-  id: string,
-  completeTodo: (id: string) => void
-}
-
-interface TodoState {
+interface CompleteCheckBoxProps {
   todo: Todo
 }
 
-class CompleteCheckBox extends ComponentBase<{}, TodoState> {
-  protected _buildState(props: CompleteCheckBoxProps, initialBuild: boolean): TodoState {
-    return {
-      todo: TodoStore.getTodoById(props.id),
-    
-    };
+interface TodoState {
+  status: boolean
+}
+
+class CompleteCheckBox extends React.Component<CompleteCheckBoxProps, TodoState> {
+
+  constructor(props: CompleteCheckBoxProps) {
+    super(props);
+    this.state = {
+      status: props.todo.status
+    }
+  }
+
+  private setComplete = () => {
+    this.setState({
+      status: !this.state.status
+    });
+    TodoStore.setTodoComplete(this.props.todo);
   }
 
   render() {
     return (
       <React.Fragment>
-      <CheckBox
-        label="Complete"
-        checked={checked}
-        onChange={onComplete}
-      />
-    </React.Fragment>
+        <CheckBox
+          label="Complete"
+          checked={this.state.status}
+          onChange={this.setComplete}
+        />
+      </React.Fragment>
     );
   }
 
 }
-
-
 
 export default CompleteCheckBox;
