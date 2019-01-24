@@ -33,7 +33,6 @@ class CompleteCheckBox extends React.Component<CompleteCheckBoxProps, TodoState>
     return (
       <React.Fragment>
         <CheckBox
-          label="Complete"
           checked={this.state.status}
           onChange={this.setComplete}
         />
