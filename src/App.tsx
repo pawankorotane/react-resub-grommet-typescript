@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { ComponentBase } from 'resub';
 import {
   Grommet,
@@ -33,7 +33,7 @@ class App extends ComponentBase<{}, AppState> {
       addForm: false
     };
   }
-
+  
   private _OpenForm = () => {
     this.setState({ addForm: true });
   };

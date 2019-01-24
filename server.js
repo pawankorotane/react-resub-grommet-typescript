@@ -7,9 +7,10 @@ const todos = [];
 let i = 0
 while(i < 5){
     todos.push({
-        id: now.toString(),
+        id: i,
         creationTime: now,
-        text: `Test ${i}`,
+        text: `Task ${i}`,
+        status: false
     })
     i++;
 }
