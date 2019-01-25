@@ -1,6 +1,6 @@
 ## Microsoft ReSub Todo Application
 
-Redux and Mobx are two major state management library for React and I am sure most of you have used in different projects. I developed this POC to showcase another state management library particularly developed for **React Typescript** projects called Resub developed by **Microsoft Skype Team** and used in Skype Application. Resub is very easy to integrate, learn, less boilerplate code (70% less) as compared to Redux (Actions, Reducer, Saga and Select) and scalable as well for small and big projects.
+Redux and Mobx are two major state management library for React and I am sure most of you have used in different projects. I developed this POC to showcase another state management library particularly developed for **React Typescript** projects called Resub developed by **Microsoft Skype Team** and used in Skype Application. Resub is very easy to integrate, learn, less boilerplate code as compared to Redux (Actions, Reducer, Saga and Select) and scalable as well for small and big projects.
 
 Resub docs: https://github.com/Microsoft/ReSub 
 
