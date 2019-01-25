@@ -1,6 +1,14 @@
+## Microsoft ReSub Todo Application
+
+Redux and Mobx are two major state management library for React and I am sure most of you have used in different projects. I developed this POC to showcase another state management library particularly developed for **React Typescript** projects called Resub developed by **Microsoft Skype Team** and used in widely Skype Application. Resub is very easy to integrate, learn, less boilerplate code (70% less) as compared to Redux (Actions, Reducer, Saga and Select) and scalable as well for small and big projects.
+
+Resub docs: https://github.com/Microsoft/ReSub 
+
+CSS Framework: https://v2.grommet.io/
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+### Available Scripts
 
 In the project directory, you can run:
 
@@ -8,6 +16,8 @@ In the project directory, you can run:
 
 Runs the app in the development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+API runs on [http://localhost:4000/api/todos](http://localhost:4000/api/todos)
 
 The page will reload if you make edits.<br>
 You will also see any lint errors in the console.
@@ -42,3 +52,7 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+[Resub Data Management Library](https://github.com/Microsoft/ReSub)
+
+[Grommet React CSS Framework](https://v2.grommet.io/)

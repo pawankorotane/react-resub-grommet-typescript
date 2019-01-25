@@ -19,4 +19,4 @@ app.get('/api/todos', (req, res) => {
     res.json({todos});
 });
 
-app.listen(4000);
+app.listen(4000, () => console.log('API is running on port 4000'));
