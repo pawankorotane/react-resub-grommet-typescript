@@ -19,7 +19,6 @@ import { Add } from 'grommet-icons';
 import { AppBar, DeleteButton, TodoAddTaskForm } from './components';
 import { Todo } from './models/TodoModels';
 import TodoStore from './store/TodoStore';
-import CompleteCheckBox from './components/CompleteCheckbox';
 
 interface AppState {
   addForm: boolean;
