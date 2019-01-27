@@ -10,7 +10,8 @@ import {
   TableHeader,
   TableCell,
   TableRow,
-  TableBody
+  TableBody,
+  CheckBox
 } from 'grommet';
 import { v1 } from 'grommet-theme-v1';
 import { Add } from 'grommet-icons';
@@ -49,7 +50,6 @@ class App extends ComponentBase<{}, AppState> {
   private _onDelete = (id: string) => {
     TodoStore.deleteTodo(id);
   };
-
 
   render() {
     return (
@@ -91,7 +91,7 @@ class App extends ComponentBase<{}, AppState> {
                 {this.state.todos.map((val, index) => (
                   <TableRow key={index}>
                     <TableCell>
-                      <CompleteCheckBox todo={val} />
+                    <CheckBox checked={val.status} onChange={() => TodoStore.setTodoComplete(val)} />
                     </TableCell>
                     <TableCell>{val.text}</TableCell>
                     <TableCell>
