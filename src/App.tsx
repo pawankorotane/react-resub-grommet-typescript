@@ -64,7 +64,7 @@ class App extends ComponentBase<{}, AppState> {
             React Microsoft ReSub Grommet Typescript Todo App
           </Heading>
         </AppBar>
-        <Box pad={{ vertical: 'medium' }} align="center">
+        <Box pad={{ vertical: 'medium' }} align="center"  margin={{ top: '100px'}}>
           <Button label="Add Task" onClick={this._OpenForm} icon={<Add />} />
           {this.state.addForm ? (
             <TodoAddTaskForm
